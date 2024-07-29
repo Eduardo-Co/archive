@@ -1,0 +1,10 @@
+build:
+  version: "1.0"
+
+theme:
+  message: "Welcome to Theme API"
+  contactDetails:
+    name: "Eduardo Cardozo"
+    email: "edubrcardozo23@gmail.com"
+  onCallSupport:
+    - (38) 99918-9936

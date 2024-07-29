@@ -1,0 +1,10 @@
+build:
+  version: "2.0"
+
+theme:
+  message: "Welcome to Topic API"
+  contactDetails:
+    name: "Eduardo Cardozo"
+    email: "edubrcardozo23@gmail.com"
+  onCallSupport:
+    - (38) 99918-9936
