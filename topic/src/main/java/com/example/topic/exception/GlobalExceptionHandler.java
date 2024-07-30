@@ -1,6 +1,7 @@
 package com.example.topic.exception;
 
 import com.example.topic.dto.ErrorResponseDto;
+import feign.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -57,6 +58,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 exception.getMessage(),
                 LocalDateTime.now()
         );
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FeignExceptionNotFound.class)
+    public ResponseEntity<ErrorResponseDto> handleFeignExceptionNotFound(FeignExceptionNotFound ex, WebRequest webRequest) {
+        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(
+                webRequest.getDescription(false),
+                HttpStatus.NOT_FOUND,
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
     }
 }

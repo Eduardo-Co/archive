@@ -1,12 +1,12 @@
 package com.example.topic.controller;
 
 import com.example.topic.dto.ResponseDto;
+import com.example.topic.dto.ThemeContactInfoDto;
 import com.example.topic.dto.ThemeDto;
 import com.example.topic.service.IThemeService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,13 +19,17 @@ import java.util.List;
 @RequestMapping("/theme")
 public class ThemeController {
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+
     private final IThemeService themeService;
 
+    private final ThemeContactInfoDto themeContactInfoDto;
+
     @Autowired
-    public ThemeController(IThemeService themeService) {
+    public ThemeController(IThemeService themeService, HttpServletRequest request, ThemeContactInfoDto themeContactInfoDto) {
         this.themeService = themeService;
+        this.request = request;
+        this.themeContactInfoDto = themeContactInfoDto;
     }
 
     @PostMapping("/create")
@@ -89,5 +93,12 @@ public class ThemeController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(responseDto);
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<ThemeContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(themeContactInfoDto);
     }
 }
